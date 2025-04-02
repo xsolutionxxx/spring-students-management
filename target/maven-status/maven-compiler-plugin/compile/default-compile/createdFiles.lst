@@ -1,0 +1,12 @@
+com\example\studentmanagement\dto\RequestStudentDTO.class
+com\example\studentmanagement\model\Student.class
+com\example\studentmanagement\repository\impl\StudentRepositoryImpl.class
+com\example\studentmanagement\dto\ResponseStudentDTO.class
+com\example\studentmanagement\model\Role.class
+com\example\studentmanagement\service\impl\StudentServiceImpl.class
+com\example\studentmanagement\StudentManagementApplication.class
+com\example\studentmanagement\service\StudentService.class
+com\example\studentmanagement\controller\HomeController.class
+com\example\studentmanagement\controller\StudentRestController.class
+com\example\studentmanagement\repository\StudentRepository.class
+com\example\studentmanagement\model\User.class
