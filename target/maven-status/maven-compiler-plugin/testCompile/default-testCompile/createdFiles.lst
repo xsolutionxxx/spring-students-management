@@ -1,2 +1,2 @@
-com\example\studentmanagement\controller\StudentRestControllerTest.class
 com\example\studentmanagement\service\impl\StudentServiceImplTest.class
+com\example\studentmanagement\controller\StudentRestControllerTest.class

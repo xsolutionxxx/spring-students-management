@@ -1,6 +1,6 @@
+com\example\studentmanagement\exception\ErrorResponse.class
 com\example\studentmanagement\dto\RequestStudentDTO.class
 com\example\studentmanagement\model\Student.class
-com\example\studentmanagement\repository\impl\StudentRepositoryImpl.class
 com\example\studentmanagement\dto\ResponseStudentDTO.class
 com\example\studentmanagement\exception\StudentNotFoundException.class
 com\example\studentmanagement\model\Role.class

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.verify;
@@ -118,8 +117,8 @@ class StudentServiceImplTest {
         updatedStudent.setName("Updated Name");
         updatedStudent.setAge(25);
 
-        when(studentRepository.findById(1L)).thenReturn(Optional.of(student));
-        when(studentRepository.update(eq(1L), any(Student.class))).thenReturn(updatedStudent);
+        when(studentRepository.existsById(1L)).thenReturn(true);
+        when(studentRepository.save(any(Student.class))).thenReturn(updatedStudent);
 
         // Act
         ResponseStudentDTO result = studentService.updateStudent(1L, updateDTO);
@@ -128,8 +127,8 @@ class StudentServiceImplTest {
         assertNotNull(result);
         assertEquals(updatedStudent.getName(), result.getName());
         assertEquals(updatedStudent.getAge(), result.getAge());
-        verify(studentRepository).findById(1L);
-        verify(studentRepository).update(eq(1L), any(Student.class));
+        verify(studentRepository).existsById(1L);
+        verify(studentRepository).save(any(Student.class));
     }
 
     @Test
@@ -139,35 +138,35 @@ class StudentServiceImplTest {
         updateDTO.setName("Updated Name");
         updateDTO.setAge(25);
 
-        when(studentRepository.findById(1L)).thenReturn(Optional.empty());
+        when(studentRepository.existsById(1L)).thenReturn(false);
 
         // Act & Assert
         assertThrows(StudentNotFoundException.class, () -> studentService.updateStudent(1L, updateDTO));
-        verify(studentRepository).findById(1L);
+        verify(studentRepository).existsById(1L);
         verifyNoMoreInteractions(studentRepository);
     }
 
     @Test
     void deleteStudent_ShouldDeleteStudent() {
         // Arrange
-        when(studentRepository.findById(1L)).thenReturn(Optional.of(student));
+        when(studentRepository.existsById(1L)).thenReturn(true);
 
         // Act
         studentService.deleteStudent(1L);
 
         // Assert
-        verify(studentRepository).findById(1L);
+        verify(studentRepository).existsById(1L);
         verify(studentRepository).deleteById(1L);
     }
 
     @Test
     void deleteStudent_ShouldThrowExceptionWhenStudentNotFound() {
         // Arrange
-        when(studentRepository.findById(1L)).thenReturn(Optional.empty());
+        when(studentRepository.existsById(1L)).thenReturn(false);
 
         // Act & Assert
         assertThrows(StudentNotFoundException.class, () -> studentService.deleteStudent(1L));
-        verify(studentRepository).findById(1L);
+        verify(studentRepository).existsById(1L);
         verifyNoMoreInteractions(studentRepository);
     }
 }
