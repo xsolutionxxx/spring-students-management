@@ -1,16 +1,19 @@
 package com.example.studentmanagement.service.impl;
 
-import com.example.studentmanagement.dto.RequestStudentDTO;
-import com.example.studentmanagement.dto.ResponseStudentDTO;
-import com.example.studentmanagement.model.Student;
-import com.example.studentmanagement.repository.StudentRepository;
-import com.example.studentmanagement.service.StudentService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import com.example.studentmanagement.dto.RequestStudentDTO;
+import com.example.studentmanagement.dto.ResponseStudentDTO;
+import com.example.studentmanagement.exception.StudentNotFoundException;
+import com.example.studentmanagement.model.Student;
+import com.example.studentmanagement.repository.StudentRepository;
+import com.example.studentmanagement.service.StudentService;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +31,7 @@ public class StudentServiceImpl implements StudentService {
     public ResponseStudentDTO getStudentById(Long id) {
         return studentRepository.findById(id)
                 .map(this::convertToResponseDTO)
-                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+                .orElseThrow(() -> new StudentNotFoundException("Student not found with id: " + id));
     }
 
     @Override
@@ -40,6 +43,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public ResponseStudentDTO updateStudent(Long id, RequestStudentDTO studentDTO) {
+        if (!studentRepository.findById(id).isPresent()) {
+            throw new StudentNotFoundException("Student not found with id: " + id);
+        }
         Student student = convertToEntity(studentDTO);
         student.setId(id);
         student = studentRepository.update(id, student);
@@ -48,6 +54,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteStudent(Long id) {
+        if (!studentRepository.findById(id).isPresent()) {
+            throw new StudentNotFoundException("Student not found with id: " + id);
+        }
         studentRepository.deleteById(id);
     }
 
@@ -66,4 +75,4 @@ public class StudentServiceImpl implements StudentService {
         dto.setResponseDate(LocalDateTime.now());
         return dto;
     }
-} 
+}
