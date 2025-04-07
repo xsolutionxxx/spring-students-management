@@ -1,6 +1,5 @@
 package com.example.studentmanagement.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.studentmanagement.dto.RequestStudentDTO;
 import com.example.studentmanagement.dto.ResponseStudentDTO;
+import com.example.studentmanagement.entity.Student;
 import com.example.studentmanagement.exception.StudentNotFoundException;
-import com.example.studentmanagement.model.Student;
 import com.example.studentmanagement.repository.StudentRepository;
 import com.example.studentmanagement.service.StudentService;
 
@@ -94,7 +93,7 @@ public class StudentServiceImpl implements StudentService {
         dto.setId(student.getId());
         dto.setName(student.getName());
         dto.setAge(student.getAge());
-        dto.setResponseDate(LocalDateTime.now());
+        dto.setResponseDate(student.getUpdatedAt());
         return dto;
     }
 }

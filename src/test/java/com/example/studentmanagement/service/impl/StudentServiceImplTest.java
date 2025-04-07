@@ -20,8 +20,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.studentmanagement.dto.RequestStudentDTO;
 import com.example.studentmanagement.dto.ResponseStudentDTO;
+import com.example.studentmanagement.entity.Student;
 import com.example.studentmanagement.exception.StudentNotFoundException;
-import com.example.studentmanagement.model.Student;
 import com.example.studentmanagement.repository.StudentRepository;
 
 @ExtendWith(MockitoExtension.class)

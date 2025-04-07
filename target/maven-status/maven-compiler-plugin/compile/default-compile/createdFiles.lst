@@ -1,9 +1,12 @@
+com\example\studentmanagement\entity\Student.class
 com\example\studentmanagement\exception\ErrorResponse.class
 com\example\studentmanagement\dto\RequestStudentDTO.class
-com\example\studentmanagement\model\Student.class
+com\example\studentmanagement\config\SecurityConfig.class
 com\example\studentmanagement\dto\ResponseStudentDTO.class
 com\example\studentmanagement\exception\StudentNotFoundException.class
 com\example\studentmanagement\model\Role.class
+com\example\studentmanagement\controller\LoginController.class
+com\example\studentmanagement\controller\StudentController.class
 com\example\studentmanagement\service\impl\StudentServiceImpl.class
 com\example\studentmanagement\StudentManagementApplication.class
 com\example\studentmanagement\service\StudentService.class
