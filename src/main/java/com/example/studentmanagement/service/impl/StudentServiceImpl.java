@@ -27,9 +27,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<ResponseStudentDTO> getAllStudents() {
         logger.debug("Getting all students");
-        return studentRepository.findAll().stream()
+        List<ResponseStudentDTO> students = studentRepository.findAll().stream()
                 .map(this::convertToResponseDTO)
                 .collect(Collectors.toList());
+        logger.info("Successfully retrieved {} students", students.size());
+        return students;
     }
 
     @Override
@@ -49,14 +51,14 @@ public class StudentServiceImpl implements StudentService {
         logger.debug("Creating new student: {}", studentDTO);
         Student student = convertToEntity(studentDTO);
         Student savedStudent = studentRepository.save(student);
-        logger.info("Created new student with id: {}", savedStudent.getId());
+        logger.info("Successfully created student with id: {}", savedStudent.getId());
         return convertToResponseDTO(savedStudent);
     }
 
     @Override
     @Transactional
     public ResponseStudentDTO updateStudent(Long id, RequestStudentDTO studentDTO) {
-        logger.debug("Updating student with id: {}", id);
+        logger.debug("Updating student with id: {} and data: {}", id, studentDTO);
         if (!studentRepository.existsById(id)) {
             logger.error("Student not found with id: {}", id);
             throw new StudentNotFoundException("Student not found with id: " + id);
@@ -64,7 +66,7 @@ public class StudentServiceImpl implements StudentService {
         Student student = convertToEntity(studentDTO);
         student.setId(id);
         Student updatedStudent = studentRepository.save(student);
-        logger.info("Updated student with id: {}", id);
+        logger.info("Successfully updated student with id: {}", id);
         return convertToResponseDTO(updatedStudent);
     }
 
@@ -77,7 +79,7 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentNotFoundException("Student not found with id: " + id);
         }
         studentRepository.deleteById(id);
-        logger.info("Deleted student with id: {}", id);
+        logger.info("Successfully deleted student with id: {}", id);
     }
 
     private Student convertToEntity(RequestStudentDTO dto) {

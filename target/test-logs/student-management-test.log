@@ -1,102 +1,61 @@
-00:50:31.072 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.example.studentmanagement.controller.StudentRestControllerTest]: StudentRestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-00:50:31.186 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.example.studentmanagement.StudentManagementApplication for test class com.example.studentmanagement.controller.StudentRestControllerTest
-00:50:31.434 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-00:50:31.461 [main] INFO  c.e.s.c.StudentRestControllerTest - Starting StudentRestControllerTest using Java 17.0.12 with PID 18068 (started by nazar in D:\spring\spring-students-management)
-00:50:31.461 [main] DEBUG c.e.s.c.StudentRestControllerTest - Running with Spring Boot v3.2.3, Spring v6.1.4
-00:50:31.461 [main] INFO  c.e.s.c.StudentRestControllerTest - No active profile set, falling back to 1 default profile: "default"
-00:50:33.772 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
-00:50:33.772 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-00:50:33.776 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
-00:50:33.833 [main] INFO  c.e.s.c.StudentRestControllerTest - Started StudentRestControllerTest in 2.592 seconds (process running for 3.415)
-00:50:34.018 [main] DEBUG c.e.s.c.StudentRestController - Received request to get student with id: 1
-00:50:34.021 [main] ERROR c.e.s.e.GlobalExceptionHandler - Student not found: Student not found with id: 1
-00:50:34.303 [main] DEBUG c.e.s.c.StudentRestController - Received request to create new student: RequestStudentDTO(name=John Doe, age=20)
-00:50:34.305 [main] INFO  c.e.s.c.StudentRestController - Successfully created student with id: 1
-00:50:34.314 [main] DEBUG c.e.s.c.StudentRestController - Received request to get all students
-00:50:34.314 [main] INFO  c.e.s.c.StudentRestController - Successfully retrieved 1 students
-00:50:34.327 [main] DEBUG c.e.s.c.StudentRestController - Received request to update student with id: 1
-00:50:34.328 [main] ERROR c.e.s.e.GlobalExceptionHandler - Student not found: Student not found with id: 1
-00:50:34.334 [main] DEBUG c.e.s.c.StudentRestController - Received request to delete student with id: 1
-00:50:34.334 [main] INFO  c.e.s.c.StudentRestController - Successfully deleted student with id: 1
-00:50:34.341 [main] DEBUG c.e.s.c.StudentRestController - Received request to delete student with id: 1
-00:50:34.342 [main] ERROR c.e.s.e.GlobalExceptionHandler - Student not found: Student not found with id: 1
-00:50:34.366 [main] ERROR c.e.s.e.GlobalExceptionHandler - Validation error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.example.studentmanagement.dto.ResponseStudentDTO> com.example.studentmanagement.controller.StudentRestController.createStudent(com.example.studentmanagement.dto.RequestStudentDTO): [Field error in object 'requestStudentDTO' on field 'age': rejected value [15]; codes [Min.requestStudentDTO.age,Min.age,Min.java.lang.Integer,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [requestStudentDTO.age,age]; arguments []; default message [age],16]; default message [Age must be at least 16]] 
-00:50:34.378 [main] DEBUG c.e.s.c.StudentRestController - Received request to update student with id: 1
-00:50:34.379 [main] INFO  c.e.s.c.StudentRestController - Successfully updated student with id: 1
-00:50:34.384 [main] DEBUG c.e.s.c.StudentRestController - Received request to get student with id: 1
-00:50:34.384 [main] INFO  c.e.s.c.StudentRestController - Successfully retrieved student with id: 1
-00:50:34.629 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Creating new student: RequestStudentDTO(name=John Doe, age=20)
-00:50:34.629 [main] INFO  c.e.s.s.impl.StudentServiceImpl - Created new student with id: 1
-00:50:34.641 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Getting all students
-00:50:34.644 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Updating student with id: 1
-00:50:34.645 [main] ERROR c.e.s.s.impl.StudentServiceImpl - Student not found with id: 1
-00:50:34.648 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Getting student with id: 1
-00:50:34.649 [main] ERROR c.e.s.s.impl.StudentServiceImpl - Student not found with id: 1
-00:50:34.652 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Updating student with id: 1
-00:50:34.653 [main] INFO  c.e.s.s.impl.StudentServiceImpl - Updated student with id: 1
-00:50:34.656 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Deleting student with id: 1
-00:50:34.656 [main] INFO  c.e.s.s.impl.StudentServiceImpl - Deleted student with id: 1
-00:50:34.659 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Deleting student with id: 1
-00:50:34.659 [main] ERROR c.e.s.s.impl.StudentServiceImpl - Student not found with id: 1
-00:50:34.663 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Getting student with id: 1
-00:52:44.623 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.example.studentmanagement.controller.StudentRestControllerTest]: StudentRestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-00:52:44.757 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.example.studentmanagement.StudentManagementApplication for test class com.example.studentmanagement.controller.StudentRestControllerTest
-00:52:45.004 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-00:52:45.032 [main] INFO  c.e.s.c.StudentRestControllerTest - Starting StudentRestControllerTest using Java 17.0.12 with PID 17032 (started by nazar in D:\spring\spring-students-management)
-00:52:45.032 [main] DEBUG c.e.s.c.StudentRestControllerTest - Running with Spring Boot v3.2.3, Spring v6.1.4
-00:52:45.033 [main] INFO  c.e.s.c.StudentRestControllerTest - No active profile set, falling back to 1 default profile: "default"
-00:52:47.416 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
-00:52:47.417 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-00:52:47.420 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
-00:52:47.453 [main] INFO  c.e.s.c.StudentRestControllerTest - Started StudentRestControllerTest in 2.64 seconds (process running for 3.49)
-00:52:47.598 [main] DEBUG c.e.s.c.StudentRestController - Received request to get student with id: 1
-00:52:47.600 [main] ERROR c.e.s.e.GlobalExceptionHandler - Student not found: Student not found with id: 1
-00:52:47.867 [main] DEBUG c.e.s.c.StudentRestController - Received request to create new student: RequestStudentDTO(name=John Doe, age=20)
-00:52:47.869 [main] INFO  c.e.s.c.StudentRestController - Successfully created student with id: 1
-00:52:47.878 [main] DEBUG c.e.s.c.StudentRestController - Received request to get all students
-00:52:47.878 [main] INFO  c.e.s.c.StudentRestController - Successfully retrieved 1 students
-00:52:47.892 [main] DEBUG c.e.s.c.StudentRestController - Received request to update student with id: 1
-00:52:47.894 [main] ERROR c.e.s.e.GlobalExceptionHandler - Student not found: Student not found with id: 1
-00:52:47.900 [main] DEBUG c.e.s.c.StudentRestController - Received request to delete student with id: 1
-00:52:47.900 [main] INFO  c.e.s.c.StudentRestController - Successfully deleted student with id: 1
-00:52:47.907 [main] DEBUG c.e.s.c.StudentRestController - Received request to delete student with id: 1
-00:52:47.908 [main] ERROR c.e.s.e.GlobalExceptionHandler - Student not found: Student not found with id: 1
-00:52:47.931 [main] ERROR c.e.s.e.GlobalExceptionHandler - Validation error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.example.studentmanagement.dto.ResponseStudentDTO> com.example.studentmanagement.controller.StudentRestController.createStudent(com.example.studentmanagement.dto.RequestStudentDTO): [Field error in object 'requestStudentDTO' on field 'age': rejected value [15]; codes [Min.requestStudentDTO.age,Min.age,Min.java.lang.Integer,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [requestStudentDTO.age,age]; arguments []; default message [age],16]; default message [Age must be at least 16]] 
-00:52:47.943 [main] DEBUG c.e.s.c.StudentRestController - Received request to update student with id: 1
-00:52:47.943 [main] INFO  c.e.s.c.StudentRestController - Successfully updated student with id: 1
-00:52:47.947 [main] DEBUG c.e.s.c.StudentRestController - Received request to get student with id: 1
-00:52:47.947 [main] INFO  c.e.s.c.StudentRestController - Successfully retrieved student with id: 1
-00:52:48.032 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
-00:52:48.032 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-00:52:48.033 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
-00:52:48.040 [main] DEBUG c.e.s.c.StudentRestController - Received request to create new student: RequestStudentDTO(name=John Doe, age=20)
-00:52:48.040 [main] INFO  c.e.s.c.StudentRestController - Successfully created student with id: 1
-00:52:48.059 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
-00:52:48.060 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-00:52:48.060 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
-00:52:48.065 [main] DEBUG c.e.s.c.StudentRestController - Received request to update student with id: 1
-00:52:48.065 [main] INFO  c.e.s.c.StudentRestController - Successfully updated student with id: 1
-00:52:48.077 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
-00:52:48.077 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-00:52:48.077 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
-00:52:48.078 [main] DEBUG c.e.s.c.StudentRestController - Received request to get all students
-00:52:48.078 [main] INFO  c.e.s.c.StudentRestController - Successfully retrieved 1 students
-00:52:48.089 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
-00:52:48.089 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-00:52:48.089 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
-00:52:48.090 [main] DEBUG c.e.s.c.StudentRestController - Received request to delete student with id: 1
-00:52:48.090 [main] INFO  c.e.s.c.StudentRestController - Successfully deleted student with id: 1
-00:52:48.204 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Creating new student: RequestStudentDTO(name=John Doe, age=20)
-00:52:48.204 [main] INFO  c.e.s.s.impl.StudentServiceImpl - Created new student with id: 1
-00:52:48.213 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Getting all students
-00:52:48.218 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Updating student with id: 1
-00:52:48.218 [main] ERROR c.e.s.s.impl.StudentServiceImpl - Student not found with id: 1
-00:52:48.222 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Getting student with id: 1
-00:52:48.224 [main] ERROR c.e.s.s.impl.StudentServiceImpl - Student not found with id: 1
-00:52:48.226 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Updating student with id: 1
-00:52:48.227 [main] INFO  c.e.s.s.impl.StudentServiceImpl - Updated student with id: 1
-00:52:48.230 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Deleting student with id: 1
-00:52:48.230 [main] INFO  c.e.s.s.impl.StudentServiceImpl - Deleted student with id: 1
-00:52:48.233 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Deleting student with id: 1
-00:52:48.233 [main] ERROR c.e.s.s.impl.StudentServiceImpl - Student not found with id: 1
-00:52:48.236 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Getting student with id: 1
+00:42:28.428 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.example.studentmanagement.controller.StudentRestControllerTest]: StudentRestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+00:42:28.566 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.example.studentmanagement.StudentManagementApplication for test class com.example.studentmanagement.controller.StudentRestControllerTest
+00:42:28.811 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+00:42:28.839 [main] INFO  c.e.s.c.StudentRestControllerTest - Starting StudentRestControllerTest using Java 17.0.12 with PID 4684 (started by nazar in D:\spring\spring-students-management)
+00:42:28.843 [main] DEBUG c.e.s.c.StudentRestControllerTest - Running with Spring Boot v3.2.3, Spring v6.1.4
+00:42:28.843 [main] INFO  c.e.s.c.StudentRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+00:42:31.187 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+00:42:31.187 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+00:42:31.191 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+00:42:31.245 [main] INFO  c.e.s.c.StudentRestControllerTest - Started StudentRestControllerTest in 2.632 seconds (process running for 3.475)
+00:42:31.401 [main] DEBUG c.e.s.c.StudentRestController - Received request to get student with id: 1
+00:42:31.405 [main] ERROR c.e.s.e.GlobalExceptionHandler - Student not found: Student not found with id: 1
+00:42:31.690 [main] DEBUG c.e.s.c.StudentRestController - Received request to create new student: RequestStudentDTO(name=John Doe, age=20)
+00:42:31.692 [main] INFO  c.e.s.c.StudentRestController - Successfully created student with id: 1
+00:42:31.702 [main] DEBUG c.e.s.c.StudentRestController - Received request to get all students
+00:42:31.703 [main] INFO  c.e.s.c.StudentRestController - Successfully retrieved 1 students
+00:42:31.716 [main] DEBUG c.e.s.c.StudentRestController - Received request to update student with id: 1
+00:42:31.718 [main] ERROR c.e.s.e.GlobalExceptionHandler - Student not found: Student not found with id: 1
+00:42:31.725 [main] DEBUG c.e.s.c.StudentRestController - Received request to delete student with id: 1
+00:42:31.725 [main] INFO  c.e.s.c.StudentRestController - Successfully deleted student with id: 1
+00:42:31.733 [main] DEBUG c.e.s.c.StudentRestController - Received request to delete student with id: 1
+00:42:31.734 [main] ERROR c.e.s.e.GlobalExceptionHandler - Student not found: Student not found with id: 1
+00:42:31.760 [main] ERROR c.e.s.e.GlobalExceptionHandler - Validation error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.example.studentmanagement.dto.ResponseStudentDTO> com.example.studentmanagement.controller.StudentRestController.createStudent(com.example.studentmanagement.dto.RequestStudentDTO): [Field error in object 'requestStudentDTO' on field 'age': rejected value [15]; codes [Min.requestStudentDTO.age,Min.age,Min.java.lang.Integer,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [requestStudentDTO.age,age]; arguments []; default message [age],16]; default message [Age must be at least 16]] 
+00:42:31.777 [main] DEBUG c.e.s.c.StudentRestController - Received request to update student with id: 1
+00:42:31.778 [main] INFO  c.e.s.c.StudentRestController - Successfully updated student with id: 1
+00:42:31.788 [main] DEBUG c.e.s.c.StudentRestController - Received request to get student with id: 1
+00:42:31.788 [main] INFO  c.e.s.c.StudentRestController - Successfully retrieved student with id: 1
+00:42:31.846 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+00:42:31.846 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+00:42:31.847 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+00:42:31.854 [main] DEBUG c.e.s.c.StudentRestController - Received request to create new student: RequestStudentDTO(name=John Doe, age=20)
+00:42:31.854 [main] INFO  c.e.s.c.StudentRestController - Successfully created student with id: 1
+00:42:31.873 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+00:42:31.873 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+00:42:31.874 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+00:42:31.878 [main] DEBUG c.e.s.c.StudentRestController - Received request to update student with id: 1
+00:42:31.878 [main] INFO  c.e.s.c.StudentRestController - Successfully updated student with id: 1
+00:42:31.890 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+00:42:31.890 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+00:42:31.890 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+00:42:31.891 [main] DEBUG c.e.s.c.StudentRestController - Received request to get all students
+00:42:31.891 [main] INFO  c.e.s.c.StudentRestController - Successfully retrieved 1 students
+00:42:31.902 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+00:42:31.902 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+00:42:31.902 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+00:42:31.903 [main] DEBUG c.e.s.c.StudentRestController - Received request to delete student with id: 1
+00:42:31.903 [main] INFO  c.e.s.c.StudentRestController - Successfully deleted student with id: 1
+00:42:32.037 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Creating new student: RequestStudentDTO(name=John Doe, age=20)
+00:42:32.037 [main] INFO  c.e.s.s.impl.StudentServiceImpl - Created new student with id: 1
+00:42:32.045 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Getting all students
+00:42:32.049 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Updating student with id: 1
+00:42:32.049 [main] ERROR c.e.s.s.impl.StudentServiceImpl - Student not found with id: 1
+00:42:32.053 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Getting student with id: 1
+00:42:32.054 [main] ERROR c.e.s.s.impl.StudentServiceImpl - Student not found with id: 1
+00:42:32.057 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Updating student with id: 1
+00:42:32.057 [main] INFO  c.e.s.s.impl.StudentServiceImpl - Updated student with id: 1
+00:42:32.060 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Deleting student with id: 1
+00:42:32.060 [main] INFO  c.e.s.s.impl.StudentServiceImpl - Deleted student with id: 1
+00:42:32.064 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Deleting student with id: 1
+00:42:32.064 [main] ERROR c.e.s.s.impl.StudentServiceImpl - Student not found with id: 1
+00:42:32.066 [main] DEBUG c.e.s.s.impl.StudentServiceImpl - Getting student with id: 1

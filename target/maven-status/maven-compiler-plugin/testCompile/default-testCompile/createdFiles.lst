@@ -1,2 +1,3 @@
 com\example\studentmanagement\service\impl\StudentServiceImplTest.class
+com\example\studentmanagement\logging\LoggingTest.class
 com\example\studentmanagement\controller\StudentRestControllerTest.class
