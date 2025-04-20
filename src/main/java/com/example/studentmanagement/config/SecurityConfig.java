@@ -1,7 +1,6 @@
 package com.example.studentmanagement.config;
 
-import java.util.Random;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +18,18 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Value("${spring.security.user.name}")
+    private String adminUsername;
+
+    @Value("${spring.security.user.password}")
+    private String adminPassword;
+
+    @Value("${spring.security.user2.name}")
+    private String userUsername;
+
+    @Value("${spring.security.user2.password}")
+    private String userPassword;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -32,8 +43,17 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/js/**"),
                                 new AntPathRequestMatcher("/swagger-ui/**"),
                                 new AntPathRequestMatcher("/v3/api-docs/**"),
-                                new AntPathRequestMatcher("/h2-console/**"))
+                                new AntPathRequestMatcher("/h2-console/**"),
+                                new AntPathRequestMatcher("/access-denied"))
                         .permitAll()
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/students"),
+                                new AntPathRequestMatcher("/api/students"))
+                        .hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/students/**"),
+                                new AntPathRequestMatcher("/api/students/**"))
+                        .hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -42,6 +62,8 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")
                         .permitAll())
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/access-denied"))
                 .headers(headers -> headers
                         .frameOptions(frameOptions -> frameOptions.disable()));
         return http.build();
@@ -49,35 +71,19 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        // Генерація випадкового паролю
-        String randomPassword = generateRandomPassword();
-        String encodedPassword = passwordEncoder().encode(randomPassword);
-
-        System.out.println("==========================================");
-        System.out.println("Generated login credentials:");
-        System.out.println("Username: admin");
-        System.out.println("Password: " + randomPassword);
-        System.out.println("==========================================");
-
-        UserDetails user = User.builder()
-                .username("admin")
-                .password(encodedPassword)
+        UserDetails admin = User.builder()
+                .username(adminUsername)
+                .password(passwordEncoder().encode(adminPassword))
                 .roles("ADMIN")
                 .build();
 
-        return new InMemoryUserDetailsManager(user);
-    }
+        UserDetails user = User.builder()
+                .username(userUsername)
+                .password(passwordEncoder().encode(userPassword))
+                .roles("USER")
+                .build();
 
-    private String generateRandomPassword() {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder password = new StringBuilder();
-        Random random = new Random();
-
-        for (int i = 0; i < 10; i++) {
-            password.append(chars.charAt(random.nextInt(chars.length())));
-        }
-
-        return password.toString();
+        return new InMemoryUserDetailsManager(admin, user);
     }
 
     @Bean

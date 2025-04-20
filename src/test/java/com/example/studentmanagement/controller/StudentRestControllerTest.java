@@ -57,7 +57,7 @@ class StudentRestControllerTest {
                 responseStudentDTO.setId(1L);
                 responseStudentDTO.setName("John Doe");
                 responseStudentDTO.setAge(20);
-                responseStudentDTO.setResponseDate(LocalDateTime.now());
+                responseStudentDTO.setUpdatedAt(LocalDateTime.now());
         }
 
         @Test
@@ -195,7 +195,7 @@ class StudentRestControllerTest {
                 dto.setId(id);
                 dto.setName(name);
                 dto.setAge(age);
-                dto.setResponseDate(LocalDateTime.now());
+                dto.setUpdatedAt(LocalDateTime.now());
                 return dto;
         }
 }

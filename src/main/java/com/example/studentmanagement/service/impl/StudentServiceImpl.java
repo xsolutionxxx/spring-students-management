@@ -93,7 +93,8 @@ public class StudentServiceImpl implements StudentService {
         dto.setId(student.getId());
         dto.setName(student.getName());
         dto.setAge(student.getAge());
-        dto.setResponseDate(student.getUpdatedAt());
+        dto.setCreatedAt(student.getCreatedAt());
+        dto.setUpdatedAt(student.getUpdatedAt());
         return dto;
     }
 }

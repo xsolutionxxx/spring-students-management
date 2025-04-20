@@ -85,7 +85,7 @@ class LoggingTest {
                 dto.setId(id);
                 dto.setName(name);
                 dto.setAge(age);
-                dto.setResponseDate(LocalDateTime.now());
+                dto.setUpdatedAt(LocalDateTime.now());
                 return dto;
         }
 
@@ -100,7 +100,7 @@ class LoggingTest {
                 responseStudent.setId(1L);
                 responseStudent.setName("John Doe");
                 responseStudent.setAge(20);
-                responseStudent.setResponseDate(LocalDateTime.now());
+                responseStudent.setUpdatedAt(LocalDateTime.now());
 
                 when(studentService.createStudent(any(RequestStudentDTO.class))).thenReturn(responseStudent);
 
@@ -130,7 +130,7 @@ class LoggingTest {
                 responseStudent.setId(1L);
                 responseStudent.setName("John Doe Updated");
                 responseStudent.setAge(21);
-                responseStudent.setResponseDate(LocalDateTime.now());
+                responseStudent.setUpdatedAt(LocalDateTime.now());
 
                 when(studentService.updateStudent(any(Long.class), any(RequestStudentDTO.class)))
                                 .thenReturn(responseStudent);
