@@ -1,6 +1,5 @@
 package com.example.studentmanagement.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.studentmanagement.dto.RequestStudentDTO;
 import com.example.studentmanagement.service.StudentService;
 
-import lombok.RequiredArgsConstructor;
-
 @Controller
 @RequestMapping("/students")
-@RequiredArgsConstructor
 public class StudentController {
-    @Autowired
     private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
