@@ -28,8 +28,8 @@ import com.example.studentmanagement.dto.ResponseStudentDTO;
 import com.example.studentmanagement.exception.StudentNotFoundException;
 import com.example.studentmanagement.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.example.studentmanagement.config.TestSecurityConfig;
 import org.springframework.context.annotation.Import;
+import com.example.studentmanagement.config.TestSecurityConfig;
 
 @WebMvcTest(StudentRestController.class)
 @Import(TestSecurityConfig.class)
@@ -98,77 +98,76 @@ class StudentRestControllerTest {
         @Test
         void getStudentById_ShouldReturnNotFound() throws Exception {
                 // Arrange
-                when(studentService.getStudentById(1L)).thenThrow(new StudentNotFoundException("Student not found"));
+                when(studentService.getStudentById(1L))
+                                .thenThrow(new StudentNotFoundException("Student not found with id: 1"));
 
                 // Act & Assert
                 mockMvc.perform(get("/api/students/1"))
                                 .andExpect(status().isNotFound())
                                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                                .andExpect(jsonPath("$.error").value("Student not found"));
+                                .andExpect(jsonPath("$.error").value("Student not found with id: 1"));
         }
 
         @Test
         void createStudent_ShouldCreateNewStudent() throws Exception {
                 // Arrange
-                RequestStudentDTO requestDTO = new RequestStudentDTO("John", 20);
-                ResponseStudentDTO responseDTO = createResponseStudentDTO(1L, "John", 20);
-                when(studentService.createStudent(any(RequestStudentDTO.class))).thenReturn(responseDTO);
+                when(studentService.createStudent(any(RequestStudentDTO.class)))
+                                .thenReturn(responseStudentDTO);
 
                 // Act & Assert
                 mockMvc.perform(post("/api/students")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(requestDTO)))
+                                .content(objectMapper.writeValueAsString(requestStudentDTO)))
                                 .andExpect(status().isCreated())
                                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(jsonPath("$.id").value(1))
-                                .andExpect(jsonPath("$.name").value("John"))
+                                .andExpect(jsonPath("$.name").value("John Doe"))
                                 .andExpect(jsonPath("$.age").value(20));
         }
 
         @Test
         void createStudent_ShouldReturnBadRequestWhenInvalidData() throws Exception {
                 // Arrange
-                RequestStudentDTO invalidDTO = new RequestStudentDTO("", -1);
+                RequestStudentDTO invalidStudent = new RequestStudentDTO();
+                // Missing required fields
 
                 // Act & Assert
                 mockMvc.perform(post("/api/students")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(invalidDTO)))
+                                .content(objectMapper.writeValueAsString(invalidStudent)))
                                 .andExpect(status().isBadRequest());
         }
 
         @Test
         void updateStudent_ShouldUpdateStudent() throws Exception {
                 // Arrange
-                RequestStudentDTO requestDTO = new RequestStudentDTO("John Updated", 21);
-                ResponseStudentDTO responseDTO = createResponseStudentDTO(1L, "John Updated", 21);
-                when(studentService.updateStudent(eq(1L), any(RequestStudentDTO.class))).thenReturn(responseDTO);
+                when(studentService.updateStudent(eq(1L), any(RequestStudentDTO.class)))
+                                .thenReturn(responseStudentDTO);
 
                 // Act & Assert
                 mockMvc.perform(put("/api/students/1")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(requestDTO)))
+                                .content(objectMapper.writeValueAsString(requestStudentDTO)))
                                 .andExpect(status().isOk())
                                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(jsonPath("$.id").value(1))
-                                .andExpect(jsonPath("$.name").value("John Updated"))
-                                .andExpect(jsonPath("$.age").value(21));
+                                .andExpect(jsonPath("$.name").value("John Doe"))
+                                .andExpect(jsonPath("$.age").value(20));
         }
 
         @Test
         void updateStudent_ShouldReturnNotFound() throws Exception {
                 // Arrange
-                RequestStudentDTO requestDTO = new RequestStudentDTO("John", 20);
                 when(studentService.updateStudent(eq(1L), any(RequestStudentDTO.class)))
-                                .thenThrow(new StudentNotFoundException("Student not found"));
+                                .thenThrow(new StudentNotFoundException("Student not found with id: 1"));
 
                 // Act & Assert
                 mockMvc.perform(put("/api/students/1")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(requestDTO)))
+                                .content(objectMapper.writeValueAsString(requestStudentDTO)))
                                 .andExpect(status().isNotFound())
                                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                                .andExpect(jsonPath("$.error").value("Student not found"));
+                                .andExpect(jsonPath("$.error").value("Student not found with id: 1"));
         }
 
         @Test
@@ -181,13 +180,14 @@ class StudentRestControllerTest {
         @Test
         void deleteStudent_ShouldReturnNotFound() throws Exception {
                 // Arrange
-                doThrow(new StudentNotFoundException("Student not found")).when(studentService).deleteStudent(1L);
+                doThrow(new StudentNotFoundException("Student not found with id: 1"))
+                                .when(studentService).deleteStudent(1L);
 
                 // Act & Assert
                 mockMvc.perform(delete("/api/students/1"))
                                 .andExpect(status().isNotFound())
                                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                                .andExpect(jsonPath("$.error").value("Student not found"));
+                                .andExpect(jsonPath("$.error").value("Student not found with id: 1"));
         }
 
         private ResponseStudentDTO createResponseStudentDTO(Long id, String name, Integer age) {

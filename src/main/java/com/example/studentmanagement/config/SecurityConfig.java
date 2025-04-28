@@ -1,63 +1,64 @@
 package com.example.studentmanagement.config;
 
-import com.example.studentmanagement.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-        private final CustomUserDetailsService userDetailsService;
-
-        public SecurityConfig(CustomUserDetailsService userDetailsService) {
-                this.userDetailsService = userDetailsService;
-        }
 
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
                                 .csrf(csrf -> csrf.disable())
+                                .headers(headers -> headers
+                                                .frameOptions(frameOptions -> frameOptions.sameOrigin()))
                                 .authorizeHttpRequests(auth -> auth
-                                                .requestMatchers(
-                                                                new AntPathRequestMatcher("/"),
-                                                                new AntPathRequestMatcher("/home"),
-                                                                new AntPathRequestMatcher("/login"),
-                                                                new AntPathRequestMatcher("/register"),
-                                                                new AntPathRequestMatcher("/css/**"),
-                                                                new AntPathRequestMatcher("/js/**"),
-                                                                new AntPathRequestMatcher("/swagger-ui/**"),
-                                                                new AntPathRequestMatcher("/v3/api-docs/**"),
-                                                                new AntPathRequestMatcher("/h2-console/**"),
-                                                                new AntPathRequestMatcher("/access-denied"))
+                                                .requestMatchers("/h2-console/**").permitAll()
+                                                .requestMatchers("/", "/home", "/register", "/css/**", "/js/**",
+                                                                "/images/**")
                                                 .permitAll()
-                                                .requestMatchers(
-                                                                new AntPathRequestMatcher("/students"),
-                                                                new AntPathRequestMatcher("/api/students"))
-                                                .hasAnyRole("USER", "ADMIN")
-                                                .requestMatchers(
-                                                                new AntPathRequestMatcher("/students/**"),
-                                                                new AntPathRequestMatcher("/api/students/**"))
-                                                .hasRole("ADMIN")
+                                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                                 .anyRequest().authenticated())
                                 .formLogin(form -> form
                                                 .loginPage("/login")
-                                                .defaultSuccessUrl("/students")
-                                                .permitAll())
+                                                .permitAll()
+                                                .successHandler(authenticationSuccessHandler()))
                                 .logout(logout -> logout
-                                                .logoutSuccessUrl("/")
-                                                .permitAll())
-                                .exceptionHandling(exception -> exception
-                                                .accessDeniedPage("/access-denied"))
-                                .headers(headers -> headers
-                                                .frameOptions(frameOptions -> frameOptions.disable()));
+                                                .permitAll());
+
                 return http.build();
+        }
+
+        @Bean
+        public AuthenticationSuccessHandler authenticationSuccessHandler() {
+                return new AuthenticationSuccessHandler() {
+                        private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+                        @Override
+                        public void onAuthenticationSuccess(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        Authentication authentication) throws IOException {
+                                if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+                                        redirectStrategy.sendRedirect(request, response, "/admin/users");
+                                } else {
+                                        redirectStrategy.sendRedirect(request, response, "/students");
+                                }
+                        }
+                };
         }
 
         @Bean

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
@@ -102,7 +103,8 @@ class LoggingTest {
                 responseStudent.setAge(20);
                 responseStudent.setUpdatedAt(LocalDateTime.now());
 
-                when(studentService.createStudent(any(RequestStudentDTO.class))).thenReturn(responseStudent);
+                when(studentService.createStudent(any(RequestStudentDTO.class)))
+                                .thenReturn(responseStudent);
 
                 // Act
                 mockMvc.perform(post("/api/students")
@@ -116,7 +118,8 @@ class LoggingTest {
                                 .anyMatch(event -> event.getMessage()
                                                 .contains("Received request to create new student")));
                 assertTrue(logsList.stream()
-                                .anyMatch(event -> event.getMessage().contains("Successfully created student")));
+                                .anyMatch(event -> event.getMessage()
+                                                .contains("Successfully created student")));
         }
 
         @Test
@@ -132,7 +135,7 @@ class LoggingTest {
                 responseStudent.setAge(21);
                 responseStudent.setUpdatedAt(LocalDateTime.now());
 
-                when(studentService.updateStudent(any(Long.class), any(RequestStudentDTO.class)))
+                when(studentService.updateStudent(eq(1L), any(RequestStudentDTO.class)))
                                 .thenReturn(responseStudent);
 
                 // Act
@@ -144,9 +147,11 @@ class LoggingTest {
                 // Assert
                 List<ILoggingEvent> logsList = listAppender.list;
                 assertTrue(logsList.stream()
-                                .anyMatch(event -> event.getMessage().contains("Received request to update student")));
+                                .anyMatch(event -> event.getMessage()
+                                                .contains("Received request to update student")));
                 assertTrue(logsList.stream()
-                                .anyMatch(event -> event.getMessage().contains("Successfully updated student")));
+                                .anyMatch(event -> event.getMessage()
+                                                .contains("Successfully updated student")));
         }
 
         @Test
@@ -158,8 +163,10 @@ class LoggingTest {
                 // Assert
                 List<ILoggingEvent> logsList = listAppender.list;
                 assertTrue(logsList.stream()
-                                .anyMatch(event -> event.getMessage().contains("Received request to delete student")));
+                                .anyMatch(event -> event.getMessage()
+                                                .contains("Received request to delete student")));
                 assertTrue(logsList.stream()
-                                .anyMatch(event -> event.getMessage().contains("Successfully deleted student")));
+                                .anyMatch(event -> event.getMessage()
+                                                .contains("Successfully deleted student")));
         }
 }
